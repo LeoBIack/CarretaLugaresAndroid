@@ -15,10 +15,5 @@
         android:icon="@drawable/ic_perfil"
         android:title="Perfil"
         />
-    <item android:id="@+id/configuracao"
-        android:icon="@drawable/ic_configuracao"
-        android:title="Configuração"
-        />
-
 
 </menu>

@@ -4,6 +4,9 @@
     tools:context=".MainActivity">
 
     <item
-        android:id="@+id/sair" android:icon="@drawable/ic_sair" app:showAsAction="always|withText" android:title="Sair"/>
+        android:id="@+id/sair"
+        android:icon="@drawable/ic_sair"
+        android:title="Sair"
+        app:showAsAction="always|withText" />
 
 </menu>

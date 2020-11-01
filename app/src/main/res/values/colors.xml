@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#241545</color>
+    <color name="colorPrimary">#3C1053</color>
     <color name="colorPrimaryDark">#241545</color>
     <color name="colorAccent">#2CD5C4</color>
-    <color name="cinza">#BFCED6</color>
+    <color name="cinza">#A48DD1</color>
     <color name="branco">#FFFFFF</color>
     <color name="fundo_card">#BFCED6</color>
     <color name="azul">#241545</color>

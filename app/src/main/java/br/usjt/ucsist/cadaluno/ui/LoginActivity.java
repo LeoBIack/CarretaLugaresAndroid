@@ -19,6 +19,8 @@ import br.usjt.ucsist.cadaluno.R;
 import br.usjt.ucsist.cadaluno.model.Usuario;
 import br.usjt.ucsist.cadaluno.model.UsuarioViewModel;
 
+import static br.usjt.ucsist.cadaluno.R.color.colorPrimary;
+
 public class LoginActivity extends AppCompatActivity {
 
     private Button buttonLogin;
@@ -80,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void desbloquear(){
         buttonLogin.setEnabled(true);
-        buttonLogin.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        buttonLogin.setBackgroundColor(getResources().getColor(colorPrimary));
         textViewNovoCadastro.setVisibility(View.GONE);
     }
 

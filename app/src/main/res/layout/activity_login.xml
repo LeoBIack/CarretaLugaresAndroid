@@ -14,11 +14,10 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="48dp"
         android:layout_marginRight="16dp"
-        android:background="#ffffff"
         android:gravity="center"
         android:singleLine="true"
-        android:text="Cadastro de Aluno"
-        android:textColor="#ffffff"
+        android:text="Main Icon"
+        android:textColor="@color/colorPrimary"
         android:textSize="14pt"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -57,27 +56,51 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:onClick="novoCadastro"
-        android:singleLine="true"
         android:text="Cadastre-se no My Places"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginLeft="75dp"
+        android:layout_marginRight="75dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextSenha" />
 
     <Button
+
         android:id="@+id/buttonLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="75dp"
         android:layout_marginRight="75dp"
         android:layout_marginBottom="48dp"
-        android:background="@color/colorPrimary"
+        android:text="@string/login"
         android:onClick="login"
-        android:text="LOGIN"
         android:textColor="@color/colorAccent"
         android:textSize="12pt"
+        android:background="@drawable/borda_arredondada"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"/>
+
+
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="75dp"-->
+<!--        android:layout_marginRight="75dp"-->
+<!--        android:layout_marginBottom="48dp"-->
+<!--        android:background="@color/colorAccent"-->
+<!--        android:onClick="login"-->
+<!--        android:text="LOGIN"-->
+<!--        android:textColor="@color/colorPrimaryDark"-->
+<!--        android:textSize="12pt"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        android:bottomLeftRadius="10dp"-->
+<!--        android:bottomRightRadius="10dp"-->
+<!--        android:topLeftRadius="10dp"-->
+<!--        android:topRightRadius="10dp"-->
+<!--        android:padding="10dp"-->
+<!--        android:shape="rectangle" //-->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
