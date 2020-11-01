@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#EF5B50</color>
-    <color name="colorPrimaryDark">#7C0F07</color>
-    <color name="colorAccent">#E1948E</color>
-    <color name="fundo_vermelho">#00FF00</color>
-    <color name="cinza">#CCCCCC</color>
+    <color name="colorPrimary">#241545</color>
+    <color name="colorPrimaryDark">#241545</color>
+    <color name="colorAccent">#2CD5C4</color>
+    <color name="cinza">#BFCED6</color>
     <color name="branco">#FFFFFF</color>
-    <color name="fundo_card">#F1DCDC</color>
-    <color name="azul">#3F51B5</color>
+    <color name="fundo_card">#BFCED6</color>
+    <color name="azul">#241545</color>
 
 </resources>
