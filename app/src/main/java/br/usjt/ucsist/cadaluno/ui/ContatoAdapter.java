@@ -24,7 +24,7 @@ public class ContatoAdapter extends RecyclerView.Adapter<ContatoAdapter.ContatoH
     @Override
     public ContatoHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_contato, parent, false);
+                .inflate(R.layout.item_local, parent, false);
 
         return new ContatoHolder(itemView);
     }
