@@ -19,13 +19,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.orhanobut.hawk.Hawk;
-
 import br.usjt.ucsist.cadaluno.R;
 import br.usjt.ucsist.cadaluno.model.Contato;
 import br.usjt.ucsist.cadaluno.model.ContatoViewModel;
-import br.usjt.ucsist.cadaluno.model.Usuario;
-import br.usjt.ucsist.cadaluno.model.UsuarioViewModel;
 import br.usjt.ucsist.cadaluno.util.ImageUtil;
 
 import static android.app.Activity.RESULT_OK;
@@ -35,24 +31,26 @@ public class ContatoFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+
     private String mParam1;
     private Contato mParam2;
     private ContatoViewModel contatoViewModel;
     private Contato contatoCorrente;
     private EditText editTextNome;
     private EditText editTextEmail;
-    private EditText editTextTelefone;
-    private Button salvarContato;
-    private TextView linkContato;
+    private static Button salvarlocal;
+    private static TextView linkfoto;
     private ImageView foto;
 
-    public ContatoFragment() {
+    public ContatoFragment(Button salvarlocal, TextView linkfoto) {
         // Required empty public constructor
+        this.salvarlocal = salvarlocal;
+        this.linkfoto = linkfoto;
     }
 
 
     public static ContatoFragment newInstance(String param1, Contato param2) {
-        ContatoFragment fragment = new ContatoFragment();
+        ContatoFragment fragment = new ContatoFragment(salvarlocal, linkfoto);
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putSerializable(ARG_PARAM2, param2);
@@ -86,7 +84,6 @@ public class ContatoFragment extends Fragment {
     }
 
     private void limpar(){
-        editTextTelefone.setText("");
         editTextEmail.setText("");
         editTextNome.setText("");
         foto.setImageResource(R.drawable.ic_place_holder);
@@ -95,7 +92,7 @@ public class ContatoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_contato, container, false);
+        return inflater.inflate(R.layout.fragment_locais, container, false);
     }
 
     @Override
@@ -105,12 +102,12 @@ public class ContatoFragment extends Fragment {
 
         editTextNome = view.findViewById(R.id.editTextNomeC);
         editTextEmail = view.findViewById(R.id.editTextEmailC);
-        editTextTelefone = view.findViewById(R.id.editTextTelefoneC);
-        salvarContato = view.findViewById(R.id.buttonSalvarC);
-        linkContato = view.findViewById(R.id.linkContato);
+
+        salvarlocal = view.findViewById(R.id.buttonSalvarL);
+        linkfoto = view.findViewById(R.id.linkFoto);
         foto = view.findViewById(R.id.imagemContato);
 
-        linkContato.setOnClickListener(new View.OnClickListener() {
+        linkfoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tirarFoto();
@@ -121,11 +118,10 @@ public class ContatoFragment extends Fragment {
             contatoCorrente = mParam2;
             editTextNome.setText(contatoCorrente.getNome());
             editTextEmail.setText(contatoCorrente.getEmail());
-            editTextTelefone.setText(contatoCorrente.getTelefone());
             foto.setImageBitmap(ImageUtil.decode(contatoCorrente.getImagem()));
         }
 
-        salvarContato.setOnClickListener(new View.OnClickListener() {
+        salvarlocal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 salvar();
@@ -162,7 +158,6 @@ public class ContatoFragment extends Fragment {
 
         contatoCorrente.setNome(editTextNome.getText().toString());
         contatoCorrente.setEmail(editTextEmail.getText().toString());
-        contatoCorrente.setTelefone(editTextTelefone.getText().toString());
 
         if(mParam2 != null){
             contatoViewModel.alterarContato(contatoCorrente);
