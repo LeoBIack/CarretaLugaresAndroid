@@ -5,7 +5,8 @@
     <color name="colorAccent">#2CD5C4</color>
     <color name="cinza">#A48DD1</color>
     <color name="branco">#FFFFFF</color>
-    <color name="fundo_card">#BFCED6</color>
+    <color name="preto">#212721</color>
+    <color name="fundo_card">#d1D1CC</color>
     <color name="azul">#241545</color>
 
 </resources>
