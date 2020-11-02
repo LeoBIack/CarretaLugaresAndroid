@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.icu.util.ValueIterator;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,7 @@ import br.usjt.ucsist.cadaluno.R;
 import br.usjt.ucsist.cadaluno.model.Usuario;
 import br.usjt.ucsist.cadaluno.model.UsuarioViewModel;
 
+import static br.usjt.ucsist.cadaluno.R.color.cinza;
 import static br.usjt.ucsist.cadaluno.R.color.colorPrimary;
 
 public class LoginActivity extends AppCompatActivity {
@@ -76,7 +78,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void bloquear(){
         buttonLogin.setEnabled(false);
-        buttonLogin.setBackgroundColor(getResources().getColor(R.color.cinza));
+        //ValueIterator.Element BotaoLoginDes =
+                buttonLogin.setBackgroundColor(getResources().getColor(cinza));
         textViewNovoCadastro.setVisibility(View.VISIBLE);
     }
 
