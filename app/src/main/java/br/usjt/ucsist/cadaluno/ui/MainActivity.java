@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         replaceFragment(R.id.frameLayout,
-                HomeFragment.newInstance("",""),
+                HomeFragment.newInstance("", ""),
                 "HOMEFRAGMENT",
                 "HOME");
 
@@ -34,43 +34,35 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNav.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                switch (item.getItemId()){
+                        switch (item.getItemId()) {
 
-                    case R.id.home:
-                        replaceFragment(R.id.frameLayout,
-                                HomeFragment.newInstance("",""),
-                                "HOMEFRAGMENT",
-                                "HOME");
-                        return true;
+                            case R.id.home:
+                                replaceFragment(R.id.frameLayout,
+                                        HomeFragment.newInstance("", ""),
+                                        "HOMEFRAGMENT",
+                                        "HOME");
+                                return true;
 
-                    case R.id.contatos:
-                        replaceFragment(R.id.frameLayout,
-                                ContatoFragment.newInstance("",null),
-                                "CONTATOFRAGMENT",
-                                "CONTATO");
-                        return true;
+                            case R.id.contatos:
+                                replaceFragment(R.id.frameLayout,
+                                        ContatoFragment.newInstance("", null),
+                                        "CONTATOFRAGMENT",
+                                        "CONTATO");
+                                return true;
 
-                    case R.id.perfil:
-                        replaceFragment(R.id.frameLayout,
-                                PerfilFragment.newInstance(false,""),
-                                "PERFILFRAGMENT",
-                                "PERFIL");
-                        return true;
+                            case R.id.perfil:
+                                replaceFragment(R.id.frameLayout,
+                                        PerfilFragment.newInstance(false, ""),
+                                        "PERFILFRAGMENT",
+                                        "PERFIL");
+                                return true;
 
-                    case R.id.configuracao:
-                        replaceFragment(R.id.frameLayout,
-                                ConfiguracaoFragment.newInstance("",""),
-                                "CONFIGURACAOFRAGMENT",
-                                "CONFIGURACAO");
-                        return true;
-
-
-                }
-                return false;
-            }
+                             }
+                        return false;
+                    }
                 });
 
     }
@@ -83,12 +75,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.sair:
                 finish();
-                return(true);
+                return (true);
         }
-        return(super.onOptionsItemSelected(item));
+        return (super.onOptionsItemSelected(item));
     }
 
     protected void replaceFragment(@IdRes int containerViewId,
