@@ -19,7 +19,7 @@ public class Usuario {
         this.email = email;
         this.senha = senha;
     }
-   
+    // gets e sets
 
     public Usuario(){}
 
