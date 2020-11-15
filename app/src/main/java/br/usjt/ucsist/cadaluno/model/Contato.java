@@ -12,13 +12,10 @@ public class Contato implements Serializable {
     private String id;
     @SerializedName("nome")
     @Expose
-    private String nome;
-    @SerializedName("email")
+    private String nomeRef;
+    @SerializedName("descricao")
     @Expose
-    private String email;
-    @SerializedName("telefone")
-    @Expose
-    private String telefone;
+    private String descricao;
     @SerializedName("imagem")
     @Expose
     private String imagem;
@@ -31,28 +28,20 @@ public class Contato implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeRef() {
+        return nomeRef;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeRef(String nomeRef) {
+        this.nomeRef = nomeRef;
     }
 
-    public String getEmail() {
-        return email;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public String getImagem() {

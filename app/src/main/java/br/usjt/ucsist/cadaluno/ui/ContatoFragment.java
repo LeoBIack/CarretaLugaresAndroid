@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,8 +37,8 @@ public class ContatoFragment extends Fragment {
     private Contato mParam2;
     private ContatoViewModel contatoViewModel;
     private Contato contatoCorrente;
-    private EditText editTextNome;
-    private EditText editTextEmail;
+    private EditText editTextNomeRef;
+    private EditText editTextDescricao;
     private static Button salvarlocal;
     private static TextView linkfoto;
     private ImageView foto;
@@ -67,25 +68,31 @@ public class ContatoFragment extends Fragment {
         }
 
 
-
         contatoViewModel = new ViewModelProvider(this).get(ContatoViewModel.class);
         contatoViewModel.getSalvoSucesso().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable final Boolean sucesso) {
-                String mensagem = "Contato falhou ao salvar!";
-                if(sucesso){
-                    mensagem = "Contato salvo com sucesso!";
+                String mensagem = "O local não foi salvo";
+                if (sucesso) {
+                    mensagem = "Local salvo com sucesso!";
                     limpar();
                 }
-                Toast.makeText(getActivity(),mensagem,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), mensagem, Toast.LENGTH_SHORT).show();
 
             }
         });
+
+        if (mParam2 != null) {
+            contatoCorrente = mParam2;
+            editTextNomeRef.setText(contatoCorrente.getNomeRef());
+            editTextDescricao.setText(contatoCorrente.getDescricao());
+            foto.setImageBitmap(ImageUtil.decode(contatoCorrente.getImagem()));
+        }
     }
 
-    private void limpar(){
-        editTextEmail.setText("");
-        editTextNome.setText("");
+    private void limpar() {
+        editTextNomeRef.setText("");
+        editTextDescricao.setText("");
         foto.setImageResource(R.drawable.ic_place_holder);
     }
 
@@ -96,12 +103,12 @@ public class ContatoFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
         contatoCorrente = new Contato();
 
-        editTextNome = view.findViewById(R.id.editTextNomeC);
-        editTextEmail = view.findViewById(R.id.editTextEmailC);
+        editTextNomeRef = view.findViewById(R.id.editTextNomeL);
+        editTextDescricao = view.findViewById(R.id.editTextDescricaoL);
 
         salvarlocal = view.findViewById(R.id.buttonSalvarL);
         linkfoto = view.findViewById(R.id.linkFoto);
@@ -114,12 +121,6 @@ public class ContatoFragment extends Fragment {
             }
         });
 
-        if(mParam2 != null){
-            contatoCorrente = mParam2;
-            editTextNome.setText(contatoCorrente.getNome());
-            editTextEmail.setText(contatoCorrente.getEmail());
-            foto.setImageBitmap(ImageUtil.decode(contatoCorrente.getImagem()));
-        }
 
         salvarlocal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,7 +131,7 @@ public class ContatoFragment extends Fragment {
 
     }
 
-    private void tirarFoto(){
+    private void tirarFoto() {
         dispatchTakePictureIntent();
     }
 
@@ -150,21 +151,17 @@ public class ContatoFragment extends Fragment {
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             foto.setImageBitmap(imageBitmap);
             contatoCorrente.setImagem(ImageUtil.encode(imageBitmap));
+            Log.d("IMAGEMBITMAPENCODED-->", contatoCorrente.getImagem());
         }
-
     }
 
     public void salvar() {
 
-        contatoCorrente.setNome(editTextNome.getText().toString());
-        contatoCorrente.setEmail(editTextEmail.getText().toString());
-
-        if(mParam2 != null){
-            contatoViewModel.alterarContato(contatoCorrente);
-        }else{
+        if (mParam2 == null) {
             contatoViewModel.salvarContato(contatoCorrente);
+
+        } else {
+            contatoViewModel.alterarContato(contatoCorrente);
         }
-
-
     }
 }

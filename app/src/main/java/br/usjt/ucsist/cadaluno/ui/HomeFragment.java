@@ -1,11 +1,14 @@
 package br.usjt.ucsist.cadaluno.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.List;
 
 import br.usjt.ucsist.cadaluno.R;
@@ -23,11 +28,12 @@ import br.usjt.ucsist.cadaluno.model.Contato;
 import br.usjt.ucsist.cadaluno.model.ContatoViewModel;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment<buttonAddLocal> extends Fragment {
 
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
     private ContatoViewModel contatoViewModel;
     private List<Contato> contatos;
     private ContatoAdapter adapter;
@@ -60,6 +66,7 @@ public class HomeFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        adapter = new ContatoAdapter();
         contatoViewModel = new ViewModelProvider(this).get(ContatoViewModel.class);
         contatoViewModel.getContatosResponseLiveData().observe(this, new Observer<List<Contato>>() {
             @Override
@@ -67,17 +74,15 @@ public class HomeFragment extends Fragment {
                 if (contatosList != null) {
                     adapter.setResults(contatosList);
                 }
-                progressBar.setVisibility(View.GONE);
             }
         });
-
         adapter.setOnItemClickListener(new ContatoAdapter.ItemClickListener() {
             @Override
             public void onItemClick(int position, Contato contato) {
                 replaceFragment(R.id.frameLayout,
                         ContatoFragment.newInstance("",contato),
-                        "CONTATOFRAGMENT",
-                        "contato_click");
+                        "fragment_locais",
+                        "Local_click");
             }
         });
     }
@@ -97,7 +102,7 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         progressBar.setVisibility(View.VISIBLE);
         contatoViewModel.getContatos();
@@ -115,7 +120,9 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         progressBar = view.findViewById(R.id.progressBar);
     }
 }
+
+

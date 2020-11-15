@@ -32,9 +32,8 @@ public class ContatoAdapter extends RecyclerView.Adapter<ContatoAdapter.ContatoH
     @Override
     public void onBindViewHolder(@NonNull ContatoHolder holder, int position) {
         Contato contato = results.get(position);
-        holder.textViewNome.setText(contato.getNome());
-        holder.textViewEmail.setText(contato.getEmail());
-        holder.textViewTelefone.setText(contato.getTelefone());
+        holder.textViewNomeRef.setText(contato.getNomeRef());
+        holder.textViewDescricao.setText(contato.getDescricao());
         holder.imagemFotoCard.setImageBitmap(ImageUtil.decode(contato.getImagem()));
     }
     @Override
@@ -48,17 +47,15 @@ public class ContatoAdapter extends RecyclerView.Adapter<ContatoAdapter.ContatoH
     }
 
     class ContatoHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView textViewNome;
-        private TextView textViewEmail;
-        private TextView textViewTelefone;
+        private TextView textViewNomeRef;
+        private TextView textViewDescricao;
         private ImageView imagemFotoCard;
 
 
         public ContatoHolder(@NonNull View itemView) {
             super(itemView);
-            textViewNome = itemView.findViewById(R.id.textViewNomeContato);
-            textViewEmail = itemView.findViewById(R.id.textViewEmailContato);
-            textViewTelefone = itemView.findViewById(R.id.textViewTelefoneContato);
+            textViewNomeRef = itemView.findViewById(R.id.textViewNomeRefLocal);
+            textViewDescricao = itemView.findViewById(R.id.textViewDescricaoLocal);
             imagemFotoCard = itemView.findViewById(R.id.imagemFotoCard);
             itemView.setOnClickListener(this);
         }

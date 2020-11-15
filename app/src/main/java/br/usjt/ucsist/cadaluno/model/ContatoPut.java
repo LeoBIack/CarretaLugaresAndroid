@@ -7,48 +7,34 @@ import java.io.Serializable;
 
 public class ContatoPut implements Serializable {
 
-    @SerializedName("nome")
+    @SerializedName("nomeRef")
     @Expose
-    private String nome;
-    @SerializedName("email")
+    private String nomeRef;
+    @SerializedName("descricao")
     @Expose
-    private String email;
-    @SerializedName("telefone")
-    @Expose
-    private String telefone;
+    private String descricao;
     @SerializedName("imagem")
     @Expose
     private String imagem;
 
-    public ContatoPut(String nome, String email, String telefone, String imagem) {
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
+    public ContatoPut(String nomeRef, String descricao, String imagem) {
+        this.nomeRef = nomeRef;
+        this.descricao = descricao;
         this.imagem = imagem;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeRef() {
+        return nomeRef;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeRef(String nomeRef) { this.nomeRef = nomeRef;}
+
+    public String getDescricao() {
+        return descricao;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setEmail(String descricao) {
+        this.descricao = descricao;
     }
 
     public String getImagem() {

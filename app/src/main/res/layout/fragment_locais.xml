@@ -38,7 +38,7 @@ tools:context=".ui.ContatoFragment">
 
 
 <EditText
-    android:id="@+id/editTextNomeC"
+    android:id="@+id/editTextNomeL"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:hint="Nome de Referência"
@@ -52,30 +52,19 @@ tools:context=".ui.ContatoFragment">
 
 
 <EditText
-    android:id="@+id/editTextEmailC"
+    android:id="@+id/editTextDescricaoL"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:hint="Descrição"
-    android:inputType="textMultiLine"
+    android:singleLine="true"
     android:maxLines="3"
     android:layout_marginTop="20dp"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
-    app:layout_constraintTop_toBottomOf="@+id/editTextNomeC"
+    app:layout_constraintTop_toBottomOf="@+id/editTextNomeL"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"/>
 
-
-<!--    //android:id="@+id/editTextTelefoneC"-->
-<!--    //android:layout_width="match_parent"-->
-<!--    //android:layout_height="wrap_content"-->
-<!--    //android:hint="Telefone"-->
-<!--    //android:layout_marginTop="20dp"-->
-<!--    //android:layout_marginLeft="16dp"-->
-<!--    //android:layout_marginRight="16dp"-->
-<!--    app:layout_constraintTop_toBottomOf="@+id/editTextEmailC"-->
-<!--    app:layout_constraintLeft_toLeftOf="parent"-->
-<!--    app:layout_constraintRight_toRightOf="parent"/>-->
 
     <Button
         android:id="@+id/buttonVoltarHome"
@@ -97,7 +86,7 @@ tools:context=".ui.ContatoFragment">
     android:id="@+id/buttonSalvarL"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Adicionar"
+    android:text="Salvar"
     android:textSize="11pt"
     android:textColor="@color/colorAccent"
     android:layout_marginRight="50dp"
@@ -106,6 +95,6 @@ tools:context=".ui.ContatoFragment">
     android:background="@drawable/borda_arredondada"
     app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
-   app:layout_constraintBottom_toBottomOf="parent"/>
+    app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

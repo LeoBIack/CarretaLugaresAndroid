@@ -117,7 +117,7 @@ public class PerfilFragment extends Fragment {
         usuarioViewModel.insert(usuarioCorrente);
 
         Hawk.put("tem_cadastro", true);
-        Toast.makeText(getActivity(),"Registro salvo com sucesso!",
+        Toast.makeText(getActivity(),"Dados salvos com sucesso!",
                 Toast.LENGTH_SHORT).show();
         if(mParam1){
             getActivity().finish();

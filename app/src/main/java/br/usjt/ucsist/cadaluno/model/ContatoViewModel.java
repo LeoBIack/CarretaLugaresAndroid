@@ -17,7 +17,7 @@ public class ContatoViewModel extends AndroidViewModel {
 
     public ContatoViewModel(@NonNull Application application) {
         super(application);
-        Log.d("RESPOSTA","CRIACAO DA VIEWMODEL");
+        Log.d("RESPOSTA","Criação de ViewModel");
         contatoRepository = new ContatoRepository();
         contatosResponseLiveData = contatoRepository.getAllContatos();
         salvoComSucessoLiveData = contatoRepository.getSalvoSucesso();

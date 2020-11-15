@@ -74,14 +74,14 @@ public class ContatoRepository {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.body() != null) {
-                            Log.d("RESPOSTA", "tenho resultato-->"+response.body());
+                            Log.d("RESPOSTA", "tenho resultado-->"+response.body());
                             salvoSucessoMutableLiveData.postValue(new Boolean(true));
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Log.e("RESPOSTA", "FALHOU->"+t.getMessage());
+                        Log.e("RESPOSTA", "Local falhou ao salvar->"+t.getMessage());
                         salvoSucessoMutableLiveData.postValue(new Boolean(false));
                     }
                 });
@@ -90,15 +90,15 @@ public class ContatoRepository {
 
     public void alterarContato(Contato contato){
 
-        ContatoPut contatoPut = new ContatoPut(contato.getNome(),contato.getEmail(),
-                contato.getTelefone(), contato.getImagem());
+        ContatoPut contatoPut = new ContatoPut(contato.getNomeRef(),contato.getDescricao(),
+                 contato.getImagem());
 
         contatoService.alterarContato(contato.getId(),contatoPut)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.body() != null) {
-                            Log.d("RESPOSTA", "tenho resultato-->"+response.body());
+                            Log.d("RESPOSTA", "Novo local foi Adicionado!-->"+response.body());
                             salvoSucessoMutableLiveData.postValue(new Boolean(true));
                         }
                     }
