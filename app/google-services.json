@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "563084871220",
+    "firebase_url": "https://cadaluno-5694f.firebaseio.com",
+    "project_id": "cadaluno-5694f",
+    "storage_bucket": "cadaluno-5694f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:563084871220:android:55aaa60bea4ce8b0e9ac61",
+        "android_client_info": {
+          "package_name": "br.usjt.ucsist.cadaluno"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "563084871220-aj4kddrn6brnta9ieckrf7vcgd5503gq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.usjt.ucsist.cadaluno",
+            "certificate_hash": "7e9edd8939bd40db4e59aa1b06a9d4833da58c6c"
+          }
+        },
+        {
+          "client_id": "563084871220-01urq698jqd87217eke0abt790glcj8k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsU-J-OnyN2UXC6CnBnP5seNzhYAN2iMI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "563084871220-01urq698jqd87217eke0abt790glcj8k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -6,7 +6,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,6 +50,13 @@ public class MainActivity extends AppCompatActivity {
                                         ContatoFragment.newInstance("", null),
                                         "CONTATOFRAGMENT",
                                         "CONTATO");
+                                return true;
+
+                            case R.id.map:
+                                replaceFragment(R.id.frameLayout,
+                                        FragmentMap.newInstance(" ", null),
+                                        "MAPSFRAGMENT",
+                                        "MAPA");
                                 return true;
 
                             case R.id.perfil:

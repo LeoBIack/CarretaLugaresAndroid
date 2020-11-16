@@ -10,6 +10,10 @@
         android:icon="@drawable/ic_add_location"
         android:title="Add Local"
         />
+    <item android:id="@+id/map"
+        android:icon="@drawable/ic_mapa"
+        android:title="Mapa"
+        />
 
     <item android:id="@+id/perfil"
         android:icon="@drawable/ic_perfil"

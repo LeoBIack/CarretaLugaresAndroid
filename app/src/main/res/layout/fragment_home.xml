@@ -45,6 +45,7 @@
         android:layout_height="wrap_content"
         android:text="+"
         android:textSize="23pt"
+
         android:textColor="@color/colorAccent"
         android:layout_marginRight="150dp"
         android:layout_marginLeft="150dp"
