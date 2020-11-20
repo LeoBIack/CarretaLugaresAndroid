@@ -9,7 +9,7 @@ public class Contato implements Serializable {
 
     @SerializedName("_id")
     @Expose
-    private String id;
+    private Long id;
     @SerializedName("nome")
     @Expose
     private String nomeRef;
@@ -20,11 +20,11 @@ public class Contato implements Serializable {
     @Expose
     private String imagem;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

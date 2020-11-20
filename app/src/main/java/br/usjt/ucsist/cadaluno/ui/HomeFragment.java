@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -45,7 +46,6 @@ public class HomeFragment<buttonAddLocal> extends Fragment {
     public HomeFragment() {
         // Required empty public constructor
     }
-
 
     public static HomeFragment newInstance(String param1, String param2) {
         HomeFragment fragment = new HomeFragment();
@@ -80,7 +80,7 @@ public class HomeFragment<buttonAddLocal> extends Fragment {
             @Override
             public void onItemClick(int position, Contato contato) {
                 replaceFragment(R.id.frameLayout,
-                        ContatoFragment.newInstance("",contato),
+                        ContatoFragment.newInstance("", contato),
                         "fragment_locais",
                         "Local_click");
             }
@@ -123,6 +123,9 @@ public class HomeFragment<buttonAddLocal> extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         progressBar = view.findViewById(R.id.progressBar);
     }
+
+
 }
+
 
 
