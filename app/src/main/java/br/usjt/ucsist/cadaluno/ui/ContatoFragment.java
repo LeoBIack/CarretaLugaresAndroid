@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import br.usjt.ucsist.cadaluno.R;
 import br.usjt.ucsist.cadaluno.model.Contato;
 import br.usjt.ucsist.cadaluno.model.ContatoViewModel;
@@ -110,6 +111,7 @@ public class ContatoFragment extends Fragment {
         editTextNomeRef = view.findViewById(R.id.editTextNomeL);
         editTextDescricao = view.findViewById(R.id.editTextDescricaoL);
 
+
         salvarlocal = view.findViewById(R.id.buttonSalvarL);
         linkfoto = view.findViewById(R.id.linkFoto);
         foto = view.findViewById(R.id.imagemContato);
@@ -163,5 +165,12 @@ public class ContatoFragment extends Fragment {
         } else {
             contatoViewModel.alterarContato(contatoCorrente);
         }
+
+    }
+
+    public void voltarHome(View view) {
+
+        Intent intentVoltarHome = new Intent(getContext(), HomeFragment.class);
+        startActivity(intentVoltarHome);
     }
 }

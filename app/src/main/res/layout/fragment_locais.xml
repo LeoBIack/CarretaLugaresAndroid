@@ -71,6 +71,7 @@ tools:context=".ui.ContatoFragment">
         android:layout_height="wrap_content"
         android:text="Voltar"
         android:textSize="11pt"
+        android:onClick="voltarHome"
         android:textColor="@color/colorAccent"
         android:layout_marginRight="190dp"
         android:layout_marginLeft="50dp"
