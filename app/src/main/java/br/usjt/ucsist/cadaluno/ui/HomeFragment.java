@@ -124,7 +124,11 @@ public class HomeFragment<buttonAddLocal> extends Fragment {
         progressBar = view.findViewById(R.id.progressBar);
     }
 
+    public void addLocal(View view) {
 
+        Intent intentAddLocal = new Intent(getContext(), ContatoFragment.class);
+        startActivity(intentAddLocal);
+    }
 }
 
 
