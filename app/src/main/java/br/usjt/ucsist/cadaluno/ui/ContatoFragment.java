@@ -1,13 +1,23 @@
 package br.usjt.ucsist.cadaluno.ui;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
+import androidx.activity.OnBackPressedDispatcherOwner;
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentController;
+import androidx.fragment.app.FragmentHostCallback;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 
 import android.provider.MediaStore;
 import android.util.Log;
@@ -34,6 +44,7 @@ public class ContatoFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
 
+
     private String mParam1;
     private Contato mParam2;
     private ContatoViewModel contatoViewModel;
@@ -43,16 +54,17 @@ public class ContatoFragment extends Fragment {
     private static Button salvarlocal;
     private static TextView linkfoto;
     private ImageView foto;
+    private static Button voltar;
 
-    public ContatoFragment(Button salvarlocal, TextView linkfoto) {
+
+    public ContatoFragment() {
         // Required empty public constructor
-        this.salvarlocal = salvarlocal;
-        this.linkfoto = linkfoto;
+
     }
 
 
     public static ContatoFragment newInstance(String param1, Contato param2) {
-        ContatoFragment fragment = new ContatoFragment(salvarlocal, linkfoto);
+        ContatoFragment fragment = new ContatoFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putSerializable(ARG_PARAM2, param2);
@@ -89,6 +101,7 @@ public class ContatoFragment extends Fragment {
             editTextDescricao.setText(contatoCorrente.getDescricao());
             foto.setImageBitmap(ImageUtil.decode(contatoCorrente.getImagem()));
         }
+
     }
 
     private void limpar() {
@@ -101,6 +114,8 @@ public class ContatoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_locais, container, false);
+
+
     }
 
     @Override
@@ -110,11 +125,20 @@ public class ContatoFragment extends Fragment {
 
         editTextNomeRef = view.findViewById(R.id.editTextNomeL);
         editTextDescricao = view.findViewById(R.id.editTextDescricaoL);
-
-
         salvarlocal = view.findViewById(R.id.buttonSalvarL);
         linkfoto = view.findViewById(R.id.linkFoto);
         foto = view.findViewById(R.id.imagemContato);
+        voltar=(Button)view.findViewById(R.id.buttonVoltarHome);
+
+
+        voltar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                voltar();
+
+            }
+        });
+
 
         linkfoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,9 +192,22 @@ public class ContatoFragment extends Fragment {
 
     }
 
-    public void voltarHome(View view) {
-
-        Intent intentVoltarHome = new Intent(getContext(), HomeFragment.class);
-        startActivity(intentVoltarHome);
+    protected void replaceFragment(@IdRes int containerViewId,
+                                   @NonNull Fragment fragment,
+                                   @NonNull String fragmentTag,
+                                   @Nullable String backStackStateName) {
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(containerViewId, fragment, fragmentTag)
+                .addToBackStack(backStackStateName)
+                .commit();
     }
+
+    public void voltar() {
+        replaceFragment(R.id.frameLayout,
+                HomeFragment.newInstance("", ""),
+                "HOMEFRAGMENT",
+                "HOME");
+    }
+
 }

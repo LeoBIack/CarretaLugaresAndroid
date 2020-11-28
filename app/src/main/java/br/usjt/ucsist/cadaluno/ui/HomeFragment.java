@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -39,6 +40,7 @@ public class HomeFragment<buttonAddLocal> extends Fragment {
     private List<Contato> contatos;
     private ContatoAdapter adapter;
     private ProgressBar progressBar;
+    private static Button addLocal;
 
     private String mParam1;
     private String mParam2;
@@ -81,8 +83,8 @@ public class HomeFragment<buttonAddLocal> extends Fragment {
             public void onItemClick(int position, Contato contato) {
                 replaceFragment(R.id.frameLayout,
                         ContatoFragment.newInstance("", contato),
-                        "fragment_locais",
-                        "Local_click");
+                        "CONTATOFRAGMENT",
+                        "CONTATO");
             }
         });
     }
@@ -122,13 +124,24 @@ public class HomeFragment<buttonAddLocal> extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         progressBar = view.findViewById(R.id.progressBar);
+        addLocal = (Button) view.findViewById(R.id.buttonAddLocal);
+
+        addLocal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addLocal();
+            }
+        });
     }
 
-    public void addLocal(View view) {
 
-        Intent intentAddLocal = new Intent(getContext(), ContatoFragment.class);
-        startActivity(intentAddLocal);
+    public void addLocal() {
+        replaceFragment(R.id.frameLayout,
+                ContatoFragment.newInstance("", null),
+                "CONTATOFRAGMENT",
+                "CONTATO");
     }
+
 }
 
 
