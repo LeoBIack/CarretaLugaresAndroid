@@ -5,28 +5,34 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.usjt.ucsist.cadaluno.R;
+import br.usjt.ucsist.cadaluno.model.Local;
 
 public class MainActivity extends AppCompatActivity {
 
-    private BottomNavigationView bottomNav;
 
+    private BottomNavigationView bottomNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         replaceFragment(R.id.frameLayout,
                 HomeFragment.newInstance("", ""),
@@ -52,14 +58,14 @@ public class MainActivity extends AppCompatActivity {
 
                             case R.id.contatos:
                                 replaceFragment(R.id.frameLayout,
-                                        ContatoFragment.newInstance("", null),
+                                        LocalFragment.newInstance("", null),
                                         "CONTATOFRAGMENT",
                                         "CONTATO");
                                 return true;
 
                             case R.id.map:
                                 replaceFragment(R.id.frameLayout,
-                                        FragmentMap.newInstance(" ", null),
+                                        MapFragment.newInstance(" ", null),
                                         "MAPSFRAGMENT",
                                         "MAPA");
                                 return true;

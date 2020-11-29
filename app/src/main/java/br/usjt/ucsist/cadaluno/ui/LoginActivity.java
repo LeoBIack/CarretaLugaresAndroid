@@ -20,6 +20,7 @@ import br.usjt.ucsist.cadaluno.R;
 import br.usjt.ucsist.cadaluno.model.Usuario;
 import br.usjt.ucsist.cadaluno.model.UsuarioViewModel;
 
+import static br.usjt.ucsist.cadaluno.R.color.button_material_light;
 import static br.usjt.ucsist.cadaluno.R.color.cinza;
 import static br.usjt.ucsist.cadaluno.R.color.colorPrimary;
 
@@ -57,35 +58,35 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void updateUsuario(Usuario usuario){
+    private void updateUsuario(Usuario usuario) {
         this.usuarioCorrente = usuario;
     }
 
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
-        if(Hawk.contains("tem_cadastro")){
-            if(Hawk.get("tem_cadastro")){
+        if (Hawk.contains("tem_cadastro")) {
+            if (Hawk.get("tem_cadastro")) {
                 desbloquear();
-            }else{
+            } else {
                 bloquear();
             }
-        }else{
+        } else {
             bloquear();
         }
     }
 
-    private void bloquear(){
+    private void bloquear() {
         buttonLogin.setEnabled(false);
         //ValueIterator.Element BotaoLoginDes =
-                buttonLogin.setBackgroundColor(getResources().getColor(cinza));
+//        buttonLogin.setBackgroundColor(getResources().getColor(cinza));
         textViewNovoCadastro.setVisibility(View.VISIBLE);
     }
 
-    private void desbloquear(){
+    private void desbloquear() {
         buttonLogin.setEnabled(true);
-        buttonLogin.setBackgroundColor(getResources().getColor(colorPrimary));
+//        buttonLogin.setBackgroundColor(getResources().getColor(colorPrimary));
         textViewNovoCadastro.setVisibility(View.GONE);
     }
 
@@ -96,16 +97,16 @@ public class LoginActivity extends AppCompatActivity {
 
     public void login(View view) {
 
-        if(usuarioCorrente != null){
+        if (usuarioCorrente != null) {
             String usuario = editTextEmail.getText().toString();
             String senha = editTextSenha.getText().toString();
-            if(usuario.equalsIgnoreCase(usuarioCorrente.getEmail())
-            && senha.equals(usuarioCorrente.getSenha())){
+            if (usuario.equalsIgnoreCase(usuarioCorrente.getEmail())
+                    && senha.equals(usuarioCorrente.getSenha())) {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 editTextSenha.setText("");
-            }else {
-                Toast.makeText(this,"Usuário ou Senha Inválidos!",
+            } else {
+                Toast.makeText(this, "Usuário ou Senha Inválidos!",
                         Toast.LENGTH_SHORT).show();
             }
 

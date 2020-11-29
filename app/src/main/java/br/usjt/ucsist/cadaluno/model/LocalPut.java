@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class ContatoPut implements Serializable {
+public class LocalPut implements Serializable {
 
     @SerializedName("nomeRef")
     @Expose
@@ -17,7 +17,7 @@ public class ContatoPut implements Serializable {
     @Expose
     private String imagem;
 
-    public ContatoPut(String nomeRef, String descricao, String imagem) {
+    public LocalPut(String nomeRef, String descricao, String imagem) {
         this.nomeRef = nomeRef;
         this.descricao = descricao;
         this.imagem = imagem;

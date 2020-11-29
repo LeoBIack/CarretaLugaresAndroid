@@ -15,15 +15,15 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ContatoRepository {
+public class LocalRepository {
 
-    private static final String CONTATOS_SERVICE_BASE_URL = "http://10.0.2.2:8080";
+    private static final String LOCAIS_SERVICE_BASE_URL = "http://10.0.2.2:8080";
 
-    private ContatoService contatoService;
-    private MutableLiveData<List<Contato>> contatosResponseMutableLiveData;
+    private LocalService localService;
+    private MutableLiveData<List<Local>> contatosResponseMutableLiveData;
     private MutableLiveData<Boolean> salvoSucessoMutableLiveData;
 
-    public ContatoRepository() {
+    public LocalRepository() {
         contatosResponseMutableLiveData = new MutableLiveData<>();
         salvoSucessoMutableLiveData = new MutableLiveData<>();
 
@@ -31,20 +31,20 @@ public class ContatoRepository {
         interceptor.level(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
-        contatoService = new retrofit2.Retrofit.Builder()
-                .baseUrl(CONTATOS_SERVICE_BASE_URL)
+        localService = new retrofit2.Retrofit.Builder()
+                .baseUrl(LOCAIS_SERVICE_BASE_URL)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-                .create(ContatoService.class);
+                .create(LocalService.class);
 
     }
 
-    public void getContatos() {
-        contatoService.getAllContatos()
-                .enqueue(new Callback<List<Contato>>() {
+    public void getLocais() {
+        localService.getAllLocais()
+                .enqueue(new Callback<List<Local>>() {
                     @Override
-                    public void onResponse(Call<List<Contato>> call, Response<List<Contato>> response) {
+                    public void onResponse(Call<List<Local>> call, Response<List<Local>> response) {
                         if (response.body() != null) {
                             Log.d("RESPOSTA", "tenho resultato-->"+response.body());
                             contatosResponseMutableLiveData.postValue(response.body());
@@ -52,14 +52,14 @@ public class ContatoRepository {
                     }
 
                     @Override
-                    public void onFailure(Call<List<Contato>> call, Throwable t) {
+                    public void onFailure(Call<List<Local>> call, Throwable t) {
                         Log.e("RESPOSTA", "FALHOU->"+t.getMessage());
                         contatosResponseMutableLiveData.postValue(null);
                     }
                 });
     }
 
-    public LiveData<List<Contato>> getAllContatos() {
+    public LiveData<List<Local>> getAllLocais() {
         return contatosResponseMutableLiveData;
     }
 
@@ -67,9 +67,9 @@ public class ContatoRepository {
         return salvoSucessoMutableLiveData;
     }
 
-    public void salvarContato(Contato contato){
+    public void salvarContato(Local local){
 
-        contatoService.salvarContato(contato)
+        localService.salvarLocal(local)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -88,12 +88,12 @@ public class ContatoRepository {
 
     }
 
-    public void alterarContato(Contato contato){
+    public void alterarContato(Local local){
 
-        ContatoPut contatoPut = new ContatoPut(contato.getNomeRef(),contato.getDescricao(),
-                 contato.getImagem());
+        LocalPut localPut = new LocalPut(local.getNomeRef(), local.getDescricao(),
+                 local.getImagem());
 
-        contatoService.alterarContato(contato.getId(),contatoPut)
+        localService.alterarLocal(local.getId(), localPut)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -111,8 +111,8 @@ public class ContatoRepository {
                 });
     }
 
-    public Call<ResponseBody> deletarContato(Contato contato){
-        return contatoService.deletarContato(contato.getId());
+    public Call<ResponseBody> deletarLocal(Local local){
+        return localService.deletarLocal(local.getId());
     }
 
 

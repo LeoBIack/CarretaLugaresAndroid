@@ -1,23 +1,16 @@
 package br.usjt.ucsist.cadaluno.ui;
 
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.fragment.app.Fragment;
 
-import androidx.activity.OnBackPressedDispatcherOwner;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentController;
-import androidx.fragment.app.FragmentHostCallback;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
 
 import android.provider.MediaStore;
 import android.util.Log;
@@ -31,24 +24,29 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import br.usjt.ucsist.cadaluno.R;
-import br.usjt.ucsist.cadaluno.model.Contato;
-import br.usjt.ucsist.cadaluno.model.ContatoViewModel;
+import br.usjt.ucsist.cadaluno.model.Local;
+import br.usjt.ucsist.cadaluno.model.LocalViewModel;
 import br.usjt.ucsist.cadaluno.util.ImageUtil;
 
 import static android.app.Activity.RESULT_OK;
 
-public class ContatoFragment extends Fragment {
+public class LocalFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
 
-
     private String mParam1;
-    private Contato mParam2;
-    private ContatoViewModel contatoViewModel;
-    private Contato contatoCorrente;
+    private Local mParam2;
+    private LocalViewModel localViewModel;
+    private Local localCorrente;
     private EditText editTextNomeRef;
     private EditText editTextDescricao;
     private static Button salvarlocal;
@@ -56,15 +54,15 @@ public class ContatoFragment extends Fragment {
     private ImageView foto;
     private static Button voltar;
 
+    private FirebaseFirestore db;
 
-    public ContatoFragment() {
+    public LocalFragment() {
         // Required empty public constructor
-
     }
 
 
-    public static ContatoFragment newInstance(String param1, Contato param2) {
-        ContatoFragment fragment = new ContatoFragment();
+    public static LocalFragment newInstance(String param1, Local param2) {
+        LocalFragment fragment = new LocalFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putSerializable(ARG_PARAM2, param2);
@@ -77,12 +75,13 @@ public class ContatoFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = (Contato) getArguments().getSerializable(ARG_PARAM2);
+            mParam2 = (Local) getArguments().getSerializable(ARG_PARAM2);
+
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
         }
 
-
-        contatoViewModel = new ViewModelProvider(this).get(ContatoViewModel.class);
-        contatoViewModel.getSalvoSucesso().observe(this, new Observer<Boolean>() {
+        localViewModel = new ViewModelProvider(this).get(LocalViewModel.class);
+        localViewModel.getSalvoSucesso().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable final Boolean sucesso) {
                 String mensagem = "O local não foi salvo";
@@ -96,10 +95,10 @@ public class ContatoFragment extends Fragment {
         });
 
         if (mParam2 != null) {
-            contatoCorrente = mParam2;
-            editTextNomeRef.setText(contatoCorrente.getNomeRef());
-            editTextDescricao.setText(contatoCorrente.getDescricao());
-            foto.setImageBitmap(ImageUtil.decode(contatoCorrente.getImagem()));
+            localCorrente = mParam2;
+            editTextNomeRef.setText(localCorrente.getNomeRef());
+            editTextDescricao.setText(localCorrente.getDescricao());
+            foto.setImageBitmap(ImageUtil.decode(localCorrente.getImagem()));
         }
 
     }
@@ -121,14 +120,14 @@ public class ContatoFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
-        contatoCorrente = new Contato();
+        localCorrente = new Local();
 
         editTextNomeRef = view.findViewById(R.id.editTextNomeL);
         editTextDescricao = view.findViewById(R.id.editTextDescricaoL);
         salvarlocal = view.findViewById(R.id.buttonSalvarL);
         linkfoto = view.findViewById(R.id.linkFoto);
         foto = view.findViewById(R.id.imagemContato);
-        voltar=(Button)view.findViewById(R.id.buttonVoltarHome);
+        voltar = (Button) view.findViewById(R.id.buttonVoltarHome);
 
 
         voltar.setOnClickListener(new View.OnClickListener() {
@@ -176,21 +175,49 @@ public class ContatoFragment extends Fragment {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             foto.setImageBitmap(imageBitmap);
-            contatoCorrente.setImagem(ImageUtil.encode(imageBitmap));
-            Log.d("IMAGEMBITMAPENCODED-->", contatoCorrente.getImagem());
+            localCorrente.setImagem(ImageUtil.encode(imageBitmap));
+            Log.d("IMAGEMBITMAPENCODED-->", localCorrente.getImagem());
         }
+    }
+
+    public boolean validateInputs(String nomeRef, String descricao) {
+        return true;
     }
 
     public void salvar() {
 
         if (mParam2 == null) {
-            contatoViewModel.salvarContato(contatoCorrente);
+            localViewModel.salvarContato(localCorrente);
 
         } else {
-            contatoViewModel.alterarContato(contatoCorrente);
+            localViewModel.alterarContato(localCorrente);
         }
 
+//        String nomeRef = editTextNomeRef.getText().toString().trim();
+//        String descricao = editTextDescricao.getText().toString().trim();
+//        if (validateInputs(nomeRef, descricao)) {
+//
+//            CollectionReference dbLocais = db.collection("Locais");
+//
+//            Local local = new Local();
+
+//            dbLocais.add(local)
+//                    .addOnSuccessListener((new OnSuccessListener<DocumentReference>() {
+//                        @Override
+//                        public void onSuccess(DocumentReference documentReference) {
+//                            Toast.makeText(LocalFragment.this, "Local adicionado", Toast.LENGTH_LONG).show();
+//                        }
+//                    }))
+//                    .addOnFailureListener((new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//                            Toast.makeText(LocalFragment.this, e.getMessage(), Toast.LENGTH_LONG).show();
+//
+//                        }
+//                    }));
     }
+
+//    }
 
     protected void replaceFragment(@IdRes int containerViewId,
                                    @NonNull Fragment fragment,

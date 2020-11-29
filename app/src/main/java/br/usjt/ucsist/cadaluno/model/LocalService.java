@@ -11,22 +11,22 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
-public interface ContatoService {
+public interface LocalService {
 
     @GET("/api/7e8d64977cba48e682cbd28e0508123f/contato2")
-    Call<List<Contato>> getAllContatos();
+    Call<List<Local>> getAllLocais();
 
     @POST("/api/7e8d64977cba48e682cbd28e0508123f/contato2")
-    Call<ResponseBody> salvarContato(
+    Call<ResponseBody> salvarLocal(
             @Body
-                    Contato contato);
+                    Local local);
 
     @PUT("/api/7e8d64977cba48e682cbd28e0508123f/contato2/{id}")
-    Call<ResponseBody> alterarContato(
+    Call<ResponseBody> alterarLocal(
             @Path("id") Long id,
-            @Body ContatoPut contatoPut);
+            @Body LocalPut localPut);
 
     @DELETE("/api/7e8d64977cba48e682cbd28e0508123f/contato2/{id}")
-    Call<ResponseBody> deletarContato(
+    Call<ResponseBody> deletarLocal(
             @Path("id") Long id);
 }
